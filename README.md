@@ -94,11 +94,4 @@ This repository contains SQL files for an Event Management System. Below are the
       - rating (INT)
       - comments (TEXT)
 
-## Getting Started
 
-To use this database, follow the steps below:
-
-1. *Clone the repository*:
-   ```bash
-   git clone https://github.com/your-username/Event-Management.git
-   cd Event-Management
