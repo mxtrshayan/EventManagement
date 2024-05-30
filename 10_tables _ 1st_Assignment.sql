@@ -1,103 +1,89 @@
-CREATE DATABASE Event_Management;
-USE Event_Management;
-
--- 2. EventTypes
-CREATE TABLE EventTypes (
-    event_type_id INT PRIMARY KEY,
-    event_type_name VARCHAR(50)
+create database Event_Management;
+use Event_management;
+create table eventtypes (
+    Event_type_id int primary key,
+    Event_type_name varchar(50) not null unique
 );
 
--- 1. Events
-CREATE TABLE Events (
-    event_id INT PRIMARY KEY,
-    event_name VARCHAR(255),
-    event_type_id INT,
-    date DATE,
-    location VARCHAR(255),
-    description TEXT,
-    FOREIGN KEY (event_type_id) REFERENCES EventTypes(event_type_id)
+create table events (
+    Event_id int primary key,
+    Event_name varchar(50) not null,
+    Event_type_id int not null,
+    Date date not null,
+    Location varchar(55) not null,
+    Description text,
+    foreign key (Event_type_id) references eventtypes(event_type_id)
 );
 
--- 3. Attendees
-CREATE TABLE Attendees (
-    attendee_id INT PRIMARY KEY,
-    event_id INT,
-    name VARCHAR(255),
-    email VARCHAR(255),
-    phone VARCHAR(20),
-    registration_date DATE,
-    FOREIGN KEY (event_id) REFERENCES Events(event_id)
+create table attendees (
+    Attendee_id int primary key,
+    Event_id int not null,
+    Name varchar(50) not null,
+    Email varchar(125) not null unique,
+    Phone varchar(20) not null,
+    foreign key (Event_id) references events(event_id)
 );
 
--- 4. Speakers
-CREATE TABLE Speakers (
-    speaker_id INT PRIMARY KEY,
-    event_id INT,
-    name VARCHAR(255),
-    bio TEXT,
-    contact_info VARCHAR(255),
-    FOREIGN KEY (event_id) REFERENCES Events(event_id)
+create table speakers (
+    Speaker_id int primary key,
+    Event_id int not null,
+    Name varchar(55) not null,
+    Bio text not null,
+    Contact_info varchar(75) not null,
+    foreign key (Event_id) references events(event_id)
 );
 
--- 5. Schedules
-CREATE TABLE Schedules (
-    schedule_id INT PRIMARY KEY,
-    event_id INT,
-    session_name VARCHAR(255),
-    start_time TIME,
-    end_time TIME,
-    location VARCHAR(255),
-    FOREIGN KEY (event_id) REFERENCES Events(event_id)
+create table schedules (
+    Schedule_id int primary key,
+    Event_id int not null,
+    Session_name varchar(30) not null,
+    Start_time time not null,
+    End_time time not null,
+    Location varchar(70) not null,
+    foreign key (Event_id) references events(event_id)
 );
 
--- 6. Venues
-CREATE TABLE Venues (
-    venue_id INT PRIMARY KEY,
-    venue_name VARCHAR(255),
-    address VARCHAR(255),
-    capacity INT
+create table venues (
+    Venue_id int primary key,
+    Event_id int not null,
+    Venue_name varchar(90) not null,
+    Address varchar(95) not null,
+    Capacity int not null,
+    foreign key (Event_id) references events(event_id)
 );
 
--- 7. Registrations
-CREATE TABLE Registrations (
-    registration_id INT PRIMARY KEY,
-    attendee_id INT,
-    event_id INT,
-    registration_date DATE,
-    payment_status VARCHAR(50),
-    FOREIGN KEY (attendee_id) REFERENCES Attendees(attendee_id),
-    FOREIGN KEY (event_id) REFERENCES Events(event_id)
+create table registrations (
+    Registration_id int primary key,
+    Attendee_id int not null,
+    Event_id int not null,
+    Payment_status varchar(50) not null,
+    foreign key (Attendee_id) references attendees(attendee_id),
+    foreign key (Event_id) references events(event_id)
 );
 
--- 8. Sponsors
-CREATE TABLE Sponsors (
-    sponsor_id INT PRIMARY KEY,
-    event_id INT,
-    sponsor_name VARCHAR(255),
-    contact_info VARCHAR(255),
-    sponsorship_level VARCHAR(50),
-    FOREIGN KEY (event_id) REFERENCES Events(event_id)
+create table sponsors (
+    Sponsor_id int primary key,
+    Event_id int not null,
+    Sponsor_name varchar(50) not null,
+    Email varchar(50) not null unique,
+    foreign key (Event_id) references events(event_id)
 );
 
--- 9. Tasks
-CREATE TABLE Tasks (
-    task_id INT PRIMARY KEY,
-    event_id INT,
-    task_description TEXT,
-    assigned_to VARCHAR(255),
-    deadline DATE,
-    status VARCHAR(50),
-    FOREIGN KEY (event_id) REFERENCES Events(event_id)
+create table tasks (
+    Task_id int primary key,
+    Event_id int not null,
+    Task_description text not null,
+    Assigned_to varchar(55) not null,
+    Status varchar(50) not null,
+    foreign key (Event_id) references events(event_id)
 );
 
--- 10. Feedback
-CREATE TABLE Feedback (
-    feedback_id INT PRIMARY KEY,
-    event_id INT,
-    attendee_id INT,
-    rating INT,
-    comments TEXT,
-    FOREIGN KEY (event_id) REFERENCES Events(event_id),
-    FOREIGN KEY (attendee_id) REFERENCES Attendees(attendee_id)
+create table feedback (
+    Feedback_id int primary key,
+    Event_id int not null,
+    Attendee_id int not null,
+    Rating int not null check (Rating >= 1 and Rating <= 5),
+    Comments text,
+    foreign key (Event_id) references events(event_id),
+    foreign key (Attendee_id) references attendees(attendee_id)
 );
-
