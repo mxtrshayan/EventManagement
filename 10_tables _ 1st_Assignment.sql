@@ -4,7 +4,7 @@ USE Event_Management;
 -- 2. EventTypes
 CREATE TABLE EventTypes (
     event_type_id INT PRIMARY KEY,
-    event_type_name VARCHAR(255)
+    event_type_name VARCHAR(50)
 );
 
 -- 1. Events
