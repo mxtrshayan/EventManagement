@@ -1,10 +1,11 @@
-create table EventTypes (
-    event_type_id INT PRIMARY KEY,
-    event_type_name VARCHAR(255)
+create table Eventtypes (
+    Event_type_id int primary key auto_increment,
+    Event_type_name varchar(50) not null unique
 );
 
-INSERT INTO EventTypes (event_type_id, event_type_name) VALUES
-(1, 'Wedding'),
-(2, 'Seminar'),
-(3, 'Ceremony'),
-(4, 'Recitation event');
+insert into eventtypes (event_type_name) values
+('Wedding'),
+('Seminar'),
+('Ceremony'),
+('Recitation event');
+
