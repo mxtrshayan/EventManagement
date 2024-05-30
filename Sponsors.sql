@@ -1,15 +1,14 @@
-CREATE TABLE Sponsors (
-    sponsor_id INT PRIMARY KEY,
-    event_id INT,
-    sponsor_name VARCHAR(160),
-    email varchar(50),
-    FOREIGN KEY (event_id) REFERENCES Events(event_id)
+create table Sponsors (
+    Sponsor_id int primary key auto_increment,
+    Event_id int not null,
+    Sponsor_name varchar(50) not null,
+    Email varchar(50) not null unique,
+    foreign key (Event_id) references events(event_id)
 );
 
-insert into Sponsors(sponsor_id, event_id, sponsor_name, email)
-values 
-(1, 1, 'His father Muhamad Shahid', 'shahid@gmail.com'),
-(2, 2, 'By Own Muhammad Shayan', 'shayan303@@gmail.com'),
-(3, 3, 'His Father Abdul Ghafoor', 'shahid@gmail.com'),
-(4, 4, 'Techno innovation', 'techno@gmail.com'),
-(5,5, 'Alica global', 'alicaglobal@gmail.com');
+insert into sponsors (event_id, sponsor_name, email) values
+(1, 'His father Muhammad Shahid', 'shahid@gmail.com'),
+(2, 'By Own Muhammad Shayan', 'shayan303@gmail.com'),
+(3, 'His Father Abdul Ghafoor', 'abdulghafoor@gmail.com'),
+(4, 'Techno innovation', 'techno@gmail.com'),
+(5, 'Alica global', 'alicaglobal@gmail.com');
