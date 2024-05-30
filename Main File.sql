@@ -135,7 +135,7 @@ insert into registrations (attendee_id, event_id, payment_status) values
 (15, 5, 'yes'),
 (7, 5, 'yes');
 
-select * from registrations;
+
 create table Sponsors (
     Sponsor_id int primary key auto_increment,
     Event_id int not null,
